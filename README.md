@@ -1,1 +1,1 @@
-# EmotionDetector
+# SentiMusic
