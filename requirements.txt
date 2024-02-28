@@ -34,3 +34,4 @@ transformers==4.38.1
 triton==2.2.0
 typing_extensions==4.10.0
 urllib3==2.2.1
+scipy==1.12.0
