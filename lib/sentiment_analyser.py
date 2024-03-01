@@ -1,4 +1,5 @@
 def sentiment_analyser():
+    # import packages in the function to prevent circular import error
     from transformers import AutoModelForSequenceClassification
     from transformers import TFAutoModelForSequenceClassification
     from transformers import AutoTokenizer, AutoConfig
