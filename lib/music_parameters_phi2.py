@@ -7,7 +7,7 @@ model = AutoModelForCausalLM.from_pretrained("microsoft/phi-2", device_map="auto
 labeled_scores = ['Negative: 0.17668890953063965', 'Neutral: 0.5283784866333008', 'Positive: 0.29493260383605957']
 
 def generate(labeled_scores):
-    prompt = f"Generate musical parameters based on emotional data: {labeled_scores}. Instructions: Compose a musical piece that reflects the given emotional data. Use the negativity, neutrality, and positivity values to influence the musical parameters. Consider tempo, key, instrumentation, and dynamics. For example, a higher negativity value might correspond to a slower tempo or a darker tone. Be creative and explore the connection between emotions and music. Feel free to provide additional details or specify the musical genre if desired."
+    prompt = f"Generate musical parameters based on emotional data: {labeled_scores}. Instructions: Compose an expressive musical piece inspired by the provided emotional data. Tailor the musical parameters to embody the negativity, neutrality, and positivity values. Explore the intricate interplay of tempo, key, instrumentation, dynamics and so on to articulate the emotional nuances. For instance, a heightened negativity value might manifest in a slower tempo or a darker tonal palette. Unleash your creativity to forge a profound connection between emotions and music. Feel empowered to generate additional details or specify a desired musical genre to enhance the richness of the composition."
 
     token_ids = tokenizer.encode(prompt, add_special_tokens=False, return_tensors="pt")
 
