@@ -38,7 +38,14 @@ def sentiment_analyser():
     output = model(**encoded_input)
     scores = output[0][0].detach().numpy()
     scores = softmax(scores)
-    print(scores)
+
+    # Labels
+    labels = ["Negative: ", "Neutral: ", "Positive: "]
+
+    # Add labels to each element
+    labeled_scores = [f"{label}{value}" for label, value in zip(labels, scores)]
+
+    print(labeled_scores)
 
     '''
     # TF
@@ -58,5 +65,8 @@ def sentiment_analyser():
         l = config.id2label[ranking[i]]
         s = scores[ranking[i]]
         print(f"{i+1}) {l} {np.round(float(s), 4)}")
+    
+    # print(type(scores))
+    return labeled_scores
 
 sentiment_analyser()
