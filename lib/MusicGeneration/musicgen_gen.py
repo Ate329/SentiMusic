@@ -1,13 +1,15 @@
-from lib.MusicGeneration.musicgen_load import load_model, accelerator
-from transformers import AutoProcessor
-from IPython.display import Audio
-from datasets import load_dataset
 import scipy
+from datasets import load_dataset
+from IPython.display import Audio
+from transformers import AutoProcessor
+from musicgen_load import load_model, accelerator
+'''
+# when you run the modlue individually
+import sys
+sys.path.append("lib/MusicGeneration")
+'''
 
-'''
-model = load_model(size='medium')
-accelerator()
-'''
+model = load_model(size='small')
 
 
 def unconditional_gen(model):
@@ -45,7 +47,7 @@ def text_conditional_gen(model, music_parameters, size='small'):
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
 
 
-def audio_prompted_gen(model, size='small'):
+def audio_prompted_gen(model, music_parameters, size='small'):
     device = accelerator()
 
     dataset = load_dataset("sanchit-gandhi/gtzan",
@@ -60,7 +62,7 @@ def audio_prompted_gen(model, size='small'):
     inputs = processor(
         audio=sample["array"],
         sampling_rate=sample["sampling_rate"],
-        text=["80s blues track with groovy saxophone"],
+        text=music_parameters,
         padding=True,
         return_tensors="pt",
     )
@@ -72,7 +74,7 @@ def audio_prompted_gen(model, size='small'):
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
 
 
-def batched_audio_prompted_gen(model, size='small'):
+def batched_audio_prompted_gen(model, music_parameters, size='small'):
     device = accelerator()
 
     dataset = load_dataset("sanchit-gandhi/gtzan",
@@ -90,8 +92,7 @@ def batched_audio_prompted_gen(model, size='small'):
     inputs = processor(
         audio=[sample_1, sample_2],
         sampling_rate=sample["sampling_rate"],
-        text=["80s blues track with groovy saxophone",
-              "90s rock song with loud guitars and heavy drums"],
+        text=music_parameters,
         padding=True,
         return_tensors="pt",
     )
