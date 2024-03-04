@@ -24,13 +24,13 @@ def unconditional_gen(model):
     print(f"Audio length: {audio_length_in_s}")
 
 
-def text_conditional_gen(model, size='small'):
+def text_conditional_gen(model, music_parameters, size='small'):
     device = accelerator()
 
     processor = AutoProcessor.from_pretrained(f"facebook/musicgen-{size}")
 
     inputs = processor(
-        text=["80s pop track with bassy drums and synth", "90s rock song with loud guitars and heavy drums"],
+        text=music_parameters,
         padding=True,
         return_tensors="pt",
     )
@@ -95,3 +95,4 @@ def batched_audio_prompted_gen(model, size='small'):
     
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0], rate=sampling_rate)
+    

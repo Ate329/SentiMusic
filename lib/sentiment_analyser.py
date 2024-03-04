@@ -68,5 +68,3 @@ def sentiment_analyser():
     
     # print(type(scores))
     return labeled_scores
-
-sentiment_analyser()
