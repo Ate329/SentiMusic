@@ -31,7 +31,7 @@ def sentiment_analyser():
     # PT
     model = AutoModelForSequenceClassification.from_pretrained(MODEL)
 
-    #model.save_pretrained(MODEL)
+    # model.save_pretrained(MODEL)
     text = str(input("Enter text: "))
     text = preprocess(text)
     encoded_input = tokenizer(text, return_tensors='pt')
@@ -43,7 +43,8 @@ def sentiment_analyser():
     labels = ["Negative: ", "Neutral: ", "Positive: "]
 
     # Add labels to each element
-    labeled_scores = [f"{label}{value}" for label, value in zip(labels, scores)]
+    labeled_scores = [f"{label}{value}" for label,
+                      value in zip(labels, scores)]
 
     print(labeled_scores)
 
@@ -65,6 +66,6 @@ def sentiment_analyser():
         l = config.id2label[ranking[i]]
         s = scores[ranking[i]]
         print(f"{i+1}) {l} {np.round(float(s), 4)}")
-    
+
     # print(type(scores))
     return labeled_scores

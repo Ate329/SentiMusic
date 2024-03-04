@@ -10,13 +10,14 @@ def change_config(model, inputs):
     temperature = float(input("Enter new model temperature (randomness): "))
     model.generation_config.temperature = temperature
 
-    generate = str(input("Do you want to generate music according to the new config again? [y/N] "))
+    generate = str(
+        input("Do you want to generate music according to the new config again? [y/N] "))
     if generate.lower() == 'y':
         from IPython.display import Audio
 
         device = accelerator()
         audio_values = model.generate(**inputs.to(device))
-        
+
         sampling_rate = model.config.audio_encoder.sampling_rate
         Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
     elif generate.lower() == 'n':
