@@ -12,5 +12,4 @@ music_parameters = generate(labeled_scores)
 
 music_parameters_list = [music_parameters]
 
-text_conditional_gen(model, music_parameters=[music_parameters_list], size='small')
-    
+text_conditional_gen(model, music_parameters=music_parameters_list, size='small')
