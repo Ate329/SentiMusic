@@ -7,12 +7,15 @@ logger = config()
 
 
 def generate(labeled_scores):
-    logger.info("Tokenising...")
+    logger.info("Initialising tokenizer...")
 
     tokenizer = AutoTokenizer.from_pretrained(
         "microsoft/phi-2",
         trust_remote_code=True
     )
+
+    logger.info("Success!")
+    logger.info("Loading model Phi-2 from Hugging Face Transformers")
 
     model = AutoModelForCausalLM.from_pretrained(
         "microsoft/phi-2",
@@ -20,7 +23,9 @@ def generate(labeled_scores):
         trust_remote_code=True
     )
 
-    prompt = f"Generate musical parameters based on emotional data: {labeled_scores}. Instructions: Compose an expressive musical piece inspired by the provided emotional data. Tailor the musical parameters to embody the negativity, neutrality, and positivity values. Explore the intricate interplay of tempo, key, instrumentation, dynamics and so on to articulate the emotional nuances. For instance, a heightened negativity value might manifest in a slower tempo or a darker tonal palette. Unleash your creativity to forge a profound connection between emotions and music. Feel empowered to generate additional details or specify a desired musical genre to enhance the richness of the composition. Seperate each parameter by comma."
+    logger.info("Success!")
+
+    prompt = f"Generate musical parameters based on emotional data: {labeled_scores}. Instructions: Compose an expressive musical piece inspired by the provided emotional data. Tailor the musical parameters to embody the negativity, neutrality, and positivity values. Explore the intricate interplay of tempo, key, instrumentation, dynamics and so on to articulate the emotional nuances. For instance, a heightened negativity value might manifest in a slower tempo or a darker tonal palette. Unleash your creativity to forge a profound connection between emotions and music. Feel empowered to generate additional details or specify a desired musical genre to enhance the richness of the composition. Seperate each parameter by comma and write them in a form of a list in python."
 
     with torch.no_grad():
         token_ids = tokenizer.encode(
