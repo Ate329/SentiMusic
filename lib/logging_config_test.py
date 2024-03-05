@@ -12,5 +12,3 @@ def config():
     return logger
 
 # logger.info('This is an INFO message')
-
-config()

@@ -1,6 +1,17 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from lib.logging_config import config
 import torch
+import logging
+import logging.config
+
+
+def config():
+    logging.config.fileConfig(
+        fname='config.ini', disable_existing_loggers=False)
+
+    # Get the logger specified in the file
+    logger = logging.getLogger(__name__)
+
+    return logger
 
 
 logger = config()

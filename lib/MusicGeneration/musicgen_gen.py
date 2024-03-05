@@ -1,5 +1,4 @@
 import scipy
-from lib.logging_config import config
 from datasets import load_dataset
 from IPython.display import Audio
 from transformers import AutoProcessor
@@ -8,6 +7,19 @@ from transformers import AutoProcessor
 import sys
 sys.path.append("lib/MusicGeneration")
 '''
+import logging
+import logging.config
+
+
+def config():
+    logging.config.fileConfig(
+        fname='config.ini', disable_existing_loggers=False)
+
+    # Get the logger specified in the file
+    logger = logging.getLogger(__name__)
+
+    return logger
+
 
 # model = load_model(size='small')
 logger = config()
@@ -35,7 +47,6 @@ def unconditional_gen(model):
 
 
 def text_conditional_gen(model, music_parameters, size='small'):
-    from musicgen_load import accelerator
     device = accelerator()
 
     logger.info("Generating music by text...")
