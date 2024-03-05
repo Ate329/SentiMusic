@@ -1,2 +1,4 @@
-/lib/MusicGeneration/__pycache__/*
+*/__pycache__/
+*/*/__pycache__/
 *pyc 
+test.py 

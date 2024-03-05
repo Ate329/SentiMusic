@@ -12,6 +12,7 @@ def change_config(model, inputs):
 
     generate = str(
         input("Do you want to generate music according to the new config again? [y/N] "))
+
     if generate.lower() == 'y':
         from IPython.display import Audio
 

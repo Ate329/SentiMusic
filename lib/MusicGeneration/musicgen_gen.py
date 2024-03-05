@@ -1,18 +1,21 @@
 import scipy
+from lib.logging_config import config
 from datasets import load_dataset
 from IPython.display import Audio
 from transformers import AutoProcessor
-from musicgen_load import load_model, accelerator
 '''
 # when you run the modlue individually
 import sys
 sys.path.append("lib/MusicGeneration")
 '''
 
-model = load_model(size='small')
+# model = load_model(size='small')
+logger = config()
 
 
 def unconditional_gen(model):
+    logger.info("Generating music unconditionally...")
+
     unconditional_inputs = model.get_unconditional_inputs(num_samples=1)
 
     audio_values = model.generate(
@@ -28,9 +31,14 @@ def unconditional_gen(model):
 
     print(f"Audio length: {audio_length_in_s}")
 
+    logger.info("Success! Music saved as .wav")
+
 
 def text_conditional_gen(model, music_parameters, size='small'):
+    from musicgen_load import accelerator
     device = accelerator()
+
+    logger.info("Generating music by text...")
 
     processor = AutoProcessor.from_pretrained(f"facebook/musicgen-{size}")
 
@@ -46,9 +54,14 @@ def text_conditional_gen(model, music_parameters, size='small'):
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
 
+    logger.info("Success! Music saved as .wav")
+
 
 def audio_prompted_gen(model, music_parameters, size='small'):
+    from musicgen_load import accelerator
     device = accelerator()
+
+    logger.info("Generating music by audio...")
 
     dataset = load_dataset("sanchit-gandhi/gtzan",
                            split="train", streaming=True)
@@ -73,9 +86,14 @@ def audio_prompted_gen(model, music_parameters, size='small'):
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
 
+    logger.info("Success! Music saved as .wav")
+
 
 def batched_audio_prompted_gen(model, music_parameters, size='small'):
+    from musicgen_load import accelerator
     device = accelerator()
+
+    logger.info("Generating music by batched audio...")
 
     dataset = load_dataset("sanchit-gandhi/gtzan",
                            split="train", streaming=True)
@@ -106,3 +124,5 @@ def batched_audio_prompted_gen(model, music_parameters, size='small'):
 
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0], rate=sampling_rate)
+
+    logger.info("Success! Music saved as .wav")
