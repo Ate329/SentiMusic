@@ -10,4 +10,7 @@ labeled_scores = sentiment_analyser()
 
 music_parameters = generate(labeled_scores)
 
-text_conditional_gen(model, music_parameters, size='small')
+music_parameters_list = [music_parameters]
+
+text_conditional_gen(model, music_parameters=[music_parameters_list], size='small')
+    

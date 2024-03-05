@@ -60,7 +60,7 @@ def text_conditional_gen(model, music_parameters, size='small'):
     )
 
     audio_values = model.generate(
-        **inputs.to(device), do_sample=True, guidance_scale=3, max_new_tokens=256)
+        **inputs.to(device), do_sample=True, guidance_scale=3, max_new_tokens=512)
 
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
