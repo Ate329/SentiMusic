@@ -46,8 +46,10 @@ def unconditional_gen(model):
     logger.info("Success! Music saved as .wav")
 
 
-def text_conditional_gen(model, music_parameters, size='small'):
+def text_conditional_gen(model, music_parameters, lengeth, size='small'):
     device = accelerator()
+    
+    max_new_tokens = lengeth * model.config.audio_encoder.frame_rate
 
     logger.info("Generating music by text...")
 
@@ -60,7 +62,7 @@ def text_conditional_gen(model, music_parameters, size='small'):
     )
 
     audio_values = model.generate(
-        **inputs.to(device), do_sample=True, guidance_scale=3, max_new_tokens=512)
+        **inputs.to(device), do_sample=True, guidance_scale=3, max_new_tokens=max_new_tokens)
 
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
