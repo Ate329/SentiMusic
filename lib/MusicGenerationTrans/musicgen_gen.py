@@ -48,7 +48,7 @@ def unconditional_gen(model):
 
 def text_conditional_gen(model, music_parameters, lengeth, size='small'):
     device = accelerator()
-    
+
     max_new_tokens = lengeth * model.config.audio_encoder.frame_rate
 
     logger.info("Generating music by text...")

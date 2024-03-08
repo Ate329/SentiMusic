@@ -1,5 +1,5 @@
 def change_config(model, inputs):
-    from lib.MusicGeneration.musicgen_load import load_model, accelerator
+    from lib.MusicGenerationTrans.musicgen_load import load_model, accelerator
 
     guidiance_scale = float(input("Enter the guidiance scale: "))
     model.generation_config.guidance_scale = guidiance_scale

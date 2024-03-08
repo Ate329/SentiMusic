@@ -1,10 +1,11 @@
-from lib.MusicGeneration.musicgen_gen import *
-from lib.MusicGeneration.musicgen_load import load_model, accelerator
+from lib.MusicGenerationTrans.musicgen_gen import *
+from lib.MusicGenerationTrans.musicgen_load import load_model, accelerator
 from lib.sentiment_analyser import sentiment_analyser
 from lib.music_parameters_phi2 import generate
+from lib import MusicGenerationTrans
 
 # size can be small, medium and large
-model = load_model(size='small')
+model = MusicGenerationTrans.musicgen_load(size='small')
 
 labeled_scores = sentiment_analyser()
 

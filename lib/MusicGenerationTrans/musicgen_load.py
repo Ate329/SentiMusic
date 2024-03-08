@@ -18,7 +18,7 @@ logger = config()
 
 
 def load_model(size='small'):
-    logger.info("Loading Music Generation model...")
+    logger.info("Loading Music Generation model through Transformers...")
 
     model = MusicgenForConditionalGeneration.from_pretrained(
         f"facebook/musicgen-{size}")
@@ -35,6 +35,6 @@ def accelerator(model):
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     model.to(device)
 
-    logger.info("Success!")
+    logger.info("Success! Using device: {}".format(device))
 
     return device
