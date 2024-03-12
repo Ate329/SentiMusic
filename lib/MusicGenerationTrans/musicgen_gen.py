@@ -67,6 +67,9 @@ def text_conditional_gen(model, music_parameters, lengeth, size='small'):
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
 
+    scipy.io.wavfile.write("generated_music.wav",
+                           rate=sampling_rate, data=audio_values[0, 0].cpu().numpy())
+
     logger.info("Success! Music saved as .wav")
 
 
@@ -98,6 +101,9 @@ def audio_prompted_gen(model, music_parameters, size='small'):
 
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0].cpu().numpy(), rate=sampling_rate)
+
+    scipy.io.wavfile.write("generated_music.wav",
+                           rate=sampling_rate, data=audio_values[0, 0].cpu().numpy())
 
     logger.info("Success! Music saved as .wav")
 
@@ -137,5 +143,8 @@ def batched_audio_prompted_gen(model, music_parameters, size='small'):
 
     sampling_rate = model.config.audio_encoder.sampling_rate
     Audio(audio_values[0], rate=sampling_rate)
+
+    scipy.io.wavfile.write("generated_music.wav",
+                           rate=sampling_rate, data=audio_values[0, 0].cpu().numpy())
 
     logger.info("Success! Music saved as .wav")

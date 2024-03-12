@@ -1,16 +1,28 @@
-from lib.MusicGenerationTrans.musicgen_gen import *
-from lib.MusicGenerationTrans.musicgen_load import load_model, accelerator
 from lib.sentiment_analyser import sentiment_analyser
-from lib.music_parameters_phi2 import generate
 from lib import MusicGenerationTrans
+from lib import music_parameters_phi2
+from lib import MusicGenerationAC
 
-# size can be small, medium and large
-model = MusicGenerationTrans.musicgen_load(size='small')
+def use_transformers():
+    # size can be small, medium and large
+    model = MusicGenerationTrans.musicgen_load.load_model(size='small')
 
-labeled_scores = sentiment_analyser()
+    labeled_scores = sentiment_analyser()
 
-music_parameters = generate(labeled_scores)
+    music_parameters = music_parameters_phi2.generate(labeled_scores)
 
-music_parameters_list = [music_parameters]
+    music_parameters_list = [music_parameters]
 
-text_conditional_gen(model, music_parameters=music_parameters_list, lengeth=100, size='small')
+    MusicGenerationTrans.musicgen_gen.text_conditional_gen(model, music_parameters=music_parameters_list, lengeth=100, size='small')
+
+
+def use_audiocraft():
+    model = MusicGenerationAC.musicgen_load.load_model(size="small")
+
+    labeled_scores = sentiment_analyser()
+
+    music_parameters = music_parameters_phi2.generate(labeled_scores)
+
+    music_parameters_list = [music_parameters]
+
+    MusicGenerationAC.musicgen_gen.text_conditional_gen(model=model, music_parameters=music_parameters_list, temperature=1.0, length=60)
