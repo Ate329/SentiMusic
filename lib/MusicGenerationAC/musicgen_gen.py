@@ -17,7 +17,7 @@ def config():
 logger = config()
 
 
-def text_conditional_gen(model, music_parameters, length, temperature=1.0, progress=True, top_k=250, top_p=0.0):
+def text_conditional_gen(model, music_parameters, filename, length, temperature=1.0, progress=True, top_k=250, top_p=0.0):
     logger.info("Setting parameters for musicgen model...")
     model.set_generation_params(
         duration=length, temperature=temperature, top_k=top_k, top_p=top_p)
@@ -30,6 +30,8 @@ def text_conditional_gen(model, music_parameters, length, temperature=1.0, progr
 
     logger.info("Saving file as .wav...")
     scipy.io.wavfile.write(
-        "generated_music.wav", rate=sampling_rate, data=audio[0, 0].cpu().numpy())
+        filename, rate=sampling_rate, data=audio[0, 0].cpu().numpy())
 
     logger.info("Success")
+
+    return audio
