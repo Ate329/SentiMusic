@@ -2,7 +2,7 @@
 ***The project has not finished yet***
 (but the main functions and modules have been completed)
 
-***This project should be running with Python 3.9 or higher***
+***This project should be running with Python 3.9 (only if you want to use AudioCraft) or higher***
 
 SentiMusic is an innovative project that bridges the gap between your emotions and the music. It utilises the power of artificial intelligence to transform the sentiment of your text into a unique and personalised musical piece.
 
