@@ -7,7 +7,7 @@ from lib.MusicGenerationAC.musicgen_gen import text_conditional_gen as AC_gen
 from lib.MusicGenerationAC.musicgen_load import load_model as AC_load
 
 
-st.title("Music Generation App")
+st.title("SentiMusic")
 
 
 def use_transformers(text, filename, length, size="small"):
