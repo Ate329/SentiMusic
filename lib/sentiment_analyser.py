@@ -40,7 +40,7 @@ def preprocess(text):
     return " ".join(new_text)
 
 
-def sentiment_analyser():
+def sentiment_analyser(text):
     MODEL = f"cardiffnlp/twitter-roberta-base-sentiment-latest"
 
     logger.info("Automatically tokenising the model...")
@@ -53,7 +53,6 @@ def sentiment_analyser():
     model = AutoModelForSequenceClassification.from_pretrained(MODEL)
 
     # model.save_pretrained(MODEL)
-    text = str(input("Enter text: "))
     text = preprocess(text)
 
     logger.info("Encoding the input...")
