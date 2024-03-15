@@ -1,10 +1,34 @@
 import streamlit as st
+import logging
+import time
+from datetime import datetime
 from lib.sentiment_analyser import sentiment_analyser
 from lib.MusicGenerationTrans.musicgen_load import load_model as trans_load
 from lib.MusicGenerationTrans.musicgen_gen import text_conditional_gen as trans_gen
 from lib import music_parameters_phi2
 from lib.MusicGenerationAC.musicgen_gen import text_conditional_gen as AC_gen
 from lib.MusicGenerationAC.musicgen_load import load_model as AC_load
+
+
+def config():
+    logging.config.fileConfig(
+        fname='config.ini', disable_existing_loggers=False)
+
+    # Get the logger specified in the file
+    logger = logging.getLogger(__name__)
+
+    return logger
+
+
+logger = config()
+
+
+# A complex function using logging
+def complex_function(log_area):
+    while True:
+        # Display logs using markdown
+        log_area.markdown(f"```\n{logger}\n```")
+        time.sleep(1)  # Simulate processing time
 
 
 st.title("SentiMusic")
@@ -89,6 +113,9 @@ with col2:
 
 # Generate button
 if st.button("Generate Music"):
+    log_area = st.empty()  # Placeholder for text_area update
+    complex_function(log_area)
+
     # Clear previous output
     output.empty()
 
