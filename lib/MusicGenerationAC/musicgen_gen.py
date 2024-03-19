@@ -1,20 +1,21 @@
 from IPython.display import Audio
+from lib.streamlit_log import StreamlitLogHandler
 import logging
 import logging.config
 import scipy
 
 
 def config():
-    logging.config.fileConfig(
-        fname='config.ini', disable_existing_loggers=False)
+    logging.config.fileConfig(fname='config.ini', disable_existing_loggers=False)
 
     # Get the logger specified in the file
     logger = logging.getLogger(__name__)
 
     return logger
 
-
 logger = config()
+handler = StreamlitLogHandler()
+logger.addHandler(handler)
 
 
 def text_conditional_gen(model, music_parameters, filename, length, temperature=1.0, progress=True, top_k=250, top_p=0.0):

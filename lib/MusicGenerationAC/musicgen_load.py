@@ -1,11 +1,11 @@
 from audiocraft.models import musicgen
 import logging
 import torch
+from lib.streamlit_log import StreamlitLogHandler
 
 
 def config():
-    logging.config.fileConfig(
-        fname='config.ini', disable_existing_loggers=False)
+    logging.config.fileConfig(fname='config.ini', disable_existing_loggers=False)
 
     # Get the logger specified in the file
     logger = logging.getLogger(__name__)
@@ -14,6 +14,8 @@ def config():
 
 
 logger = config()
+handler = StreamlitLogHandler()
+logger.addHandler(handler)
 
 
 def load_model(size='small'):

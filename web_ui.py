@@ -1,13 +1,12 @@
 import streamlit as st
 import logging
-import time
-from datetime import datetime
 from lib.sentiment_analyser import sentiment_analyser
 from lib.MusicGenerationTrans.musicgen_load import load_model as trans_load
 from lib.MusicGenerationTrans.musicgen_gen import text_conditional_gen as trans_gen
 from lib import music_parameters_phi2
 from lib.MusicGenerationAC.musicgen_gen import text_conditional_gen as AC_gen
 from lib.MusicGenerationAC.musicgen_load import load_model as AC_load
+from lib.streamlit_log import StreamlitLogHandler
 
 
 def config():
@@ -21,14 +20,8 @@ def config():
 
 
 logger = config()
-
-
-# A complex function using logging
-def complex_function(log_area):
-    while True:
-        # Display logs using markdown
-        log_area.markdown(f"```\n{logger}\n```")
-        time.sleep(1)  # Simulate processing time
+handler = StreamlitLogHandler()
+logger.addHandler(handler)
 
 
 st.title("SentiMusic")
@@ -77,10 +70,6 @@ def generate_music(package, text, filename, length, temperature, size="small", t
             "Invalid package selection. Please choose Transformers or Audiocraft.")
         return None
 
-    for i in range(100):
-        progress.progress(i + 1)
-        output.write(f"Generating music... {i+1}% complete")
-
     return generated_music
 
 
@@ -104,21 +93,12 @@ with col1:
     top_p_input = st.number_input(
         "Top P (Nucleus sampling, defualt=0.0)", min_value=0.0, max_value=1.0, step=0.1, key="top_p")
 
-with col2:
-    # Create a progress bar
-    progress = st.empty()
+# Display the logs
+st.text_area("Logs", value=st.session_state.get('logs', []), height=200)
 
-    # Create a terminal for output
-    output = st.empty()
 
 # Generate button
 if st.button("Generate Music"):
-    log_area = st.empty()  # Placeholder for text_area update
-    complex_function(log_area)
-
-    # Clear previous output
-    output.empty()
-
     # Call the generate_music function with user-provided parameters
     generated_music = generate_music(package=package_select, filename=filename_input, length=length_input,
                                      temperature=temperature_input, text=text_input, size=size_select, top_k=top_k_input, top_p=top_p_input)

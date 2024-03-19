@@ -2,11 +2,11 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import logging
 import logging.config
+from lib.streamlit_log import StreamlitLogHandler
 
 
 def config():
-    logging.config.fileConfig(
-        fname='config.ini', disable_existing_loggers=False)
+    logging.config.fileConfig(fname='config.ini', disable_existing_loggers=False)
 
     # Get the logger specified in the file
     logger = logging.getLogger(__name__)
@@ -15,6 +15,8 @@ def config():
 
 
 logger = config()
+handler = StreamlitLogHandler()
+logger.addHandler(handler)
 
 
 def generate(labeled_scores):
