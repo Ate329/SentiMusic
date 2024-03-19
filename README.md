@@ -13,4 +13,4 @@ SentiMusic is an innovative project that bridges the gap between your emotions a
 ## Here is a graph showing how it works
 ![SentiMusicGraph drawio](https://github.com/Ate329/SentiMusic/assets/74974216/cffbb033-2b13-4e60-bd22-2fbda0b7f88f)  
 
-This graph is made by using [draw.io](https://app.diagrams.net)  
+This graph is created by using [draw.io](https://app.diagrams.net)  
