@@ -14,3 +14,10 @@ SentiMusic is an innovative project that bridges the gap between your emotions a
 ![SentiMusicGraph drawio](https://github.com/Ate329/SentiMusic/assets/74974216/cffbb033-2b13-4e60-bd22-2fbda0b7f88f)  
 
 This graph is created by using [draw.io](https://app.diagrams.net)  
+
+## Models used
+[cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest)  
+
+[microsoft/phi-2](https://huggingface.co/microsoft/phi-2)  
+
+[facebook/musicgen-small](https://huggingface.co/facebook/musicgen-small)  
