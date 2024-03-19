@@ -1,6 +1,6 @@
 */__pycache__/
 */*/__pycache__/
-*pyc 
-test.py 
+*.pyc 
 *.wav
+test.py 
 test_function.py
