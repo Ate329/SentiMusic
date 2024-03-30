@@ -3,3 +3,8 @@
 *.pyc 
 test.py 
 test_function.py
+__pycache__/
+build/
+dist/
+SentiMusic.spec
+.venv/
