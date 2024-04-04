@@ -8,3 +8,9 @@ build/
 dist/
 SentiMusic.spec
 .venv/
+others/
+build-v3-completed.png
+sentimusic-video.mp4
+Sentimusic.png
+SentiMusicGraph.drawio
+SentiMusicGraph.drawio.png
