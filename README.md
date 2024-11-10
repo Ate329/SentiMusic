@@ -20,3 +20,7 @@ Here is a video to introduce this project [SentiMusic](https://youtu.be/uqk_niZ5
 [microsoft/phi-2](https://huggingface.co/microsoft/phi-2)  
 
 [facebook/musicgen-small](https://huggingface.co/facebook/musicgen-small)  
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
